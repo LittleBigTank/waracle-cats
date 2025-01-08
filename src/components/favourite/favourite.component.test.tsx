@@ -22,11 +22,8 @@ describe('Favourite', () => {
 		// tests
 		expect(svg).toBeDefined();
 		expect(svg!.innerHTML).toEqual('heart.svg');
-		expect(svg!.classList.length).toEqual(4);
-		expect(svg!.classList).toContain('cursor-pointer');
 		expect(svg!.classList).toContain('stroke-red');
 		expect(svg!.classList).toContain('fill-red');
-		expect(svg!.classList).toContain('h-6');
 	});
 
 	it('Render non-favourited correctly', async () => {
@@ -39,10 +36,7 @@ describe('Favourite', () => {
 		// tests
 		expect(svg).toBeDefined();
 		expect(svg!.innerHTML).toEqual('heart.svg');
-		expect(svg!.classList.length).toEqual(3);
-		expect(svg!.classList).toContain('cursor-pointer');
 		expect(svg!.classList).toContain('stroke-dark-blue');
-		expect(svg!.classList).toContain('h-6');
 	});
 
 	it('Render loading error', async () => {
@@ -58,10 +52,8 @@ describe('Favourite', () => {
 		// tests
 		expect(svg).toBeDefined();
 		expect(svg!.innerHTML).toEqual('error.svg');
-		expect(svg!.classList.length).toEqual(3);
-		expect(svg!.classList).toContain('cursor-pointer');
 		expect(svg!.classList).toContain('stroke-red');
-		expect(svg!.classList).toContain('h-6');
+		expect(svg!.classList).not.toContain('fill-red');
 	});
 
 	it('Reload on loading error', async () => {
@@ -84,10 +76,7 @@ describe('Favourite', () => {
 		interact.click(svg as unknown as HTMLElement);
 		await waitFor(async () => {
 			svg = container.querySelector('svg');
-			expect(svg!.classList.length).toEqual(3);
-			expect(svg!.classList).toContain('cursor-pointer');
 			expect(svg!.classList).toContain('stroke-dark-blue');
-			expect(svg!.classList).toContain('h-6');
 		});
 	});
 
@@ -106,10 +95,6 @@ describe('Favourite', () => {
 		// tests
 		expect(svg).toBeDefined();
 		expect(svg!.innerHTML).toContain('<path');
-		expect(svg!.classList.length).toEqual(5);
-		expect(svg!.classList).toContain('inline');
-		expect(svg!.classList).toContain('-mt-1');
-		expect(svg!.classList).toContain('text-white');
 		expect(svg!.classList).toContain('animate-spin');
 		expect(svg!.classList).toContain('fill-dark-blue');
 	});

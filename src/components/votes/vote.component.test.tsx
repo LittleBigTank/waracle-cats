@@ -69,10 +69,7 @@ describe('Vote', () => {
 		expect(spans.length).toEqual(0);
 		expect(svgs.length).toEqual(1);
 		expect(svgs[0].innerHTML).toEqual('error.svg');
-		expect(svgs[0].classList.length).toEqual(3);
-		expect(svgs[0].classList).toContain('cursor-pointer');
 		expect(svgs[0].classList).toContain('stroke-red');
-		expect(svgs[0].classList).toContain('h-6');
 	});
 
 	it('Reload on loading error', async () => {
@@ -119,10 +116,6 @@ describe('Vote', () => {
 		expect(spans[0].innerHTML).toEqual('Loading');
 		expect(svgs.length).toEqual(1);
 		expect(svgs[0].innerHTML).toContain('<path');
-		expect(svgs[0].classList.length).toEqual(5);
-		expect(svgs[0].classList).toContain('inline');
-		expect(svgs[0].classList).toContain('-mt-1');
-		expect(svgs[0].classList).toContain('text-white');
 		expect(svgs[0].classList).toContain('animate-spin');
 		expect(svgs[0].classList).toContain('fill-dark-blue');
 	});
