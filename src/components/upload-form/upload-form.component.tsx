@@ -13,7 +13,7 @@ import DispatchResponseInterface from '../../models/interfaces/DispatchResponse.
 
 const UploadForm = () => {
   const [file, setFile] = React.useState<File | null>(null);
-  const [isSending, setIsSending] = React.useState<boolean>(true);
+  const [isSending, setIsSending] = React.useState<boolean>(false);
   const [message, setMessage] = React.useState<string>('');
   const [isError, setIsError] = React.useState<boolean>(false);
   const allowedTypes = ['image/jpeg'];
