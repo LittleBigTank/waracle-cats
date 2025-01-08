@@ -1,7 +1,7 @@
 ## ENV
-Your .env file should contain the following values:
-REACT_APP_API_BASE_URL
-REACT_APP_API_KEY
+Your .env file should contain the following values:\
+REACT_APP_API_BASE_URL\
+REACT_APP_API_KEY\
 REACT_APP_USER_ID
 
 ## Notes
