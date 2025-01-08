@@ -13,7 +13,7 @@ import DispatchResponseInterface from '../../models/interfaces/DispatchResponse.
 
 const UploadForm = () => {
   const [file, setFile] = React.useState<File | null>(null);
-  const [isSending, setIsSending] = React.useState<boolean>(false);
+  const [isSending, setIsSending] = React.useState<boolean>(true);
   const [message, setMessage] = React.useState<string>('');
   const [isError, setIsError] = React.useState<boolean>(false);
   const allowedTypes = ['image/jpeg'];
@@ -79,7 +79,7 @@ const UploadForm = () => {
       </div>
 
       {isSending
-        ? <div className='sm:inline-block w-[79px]'><Loader size={30} /></div>
+        ? <div className='sm:inline-block w-[67px]'><Loader size={30} /></div>
         : <button
             className='block sm:inline-block mx-auto text-white bg-dark-blue p-2 rounded border hover:bg-white hover:text-dark-blue sm:rounded-l-none'
             onClick={onSubmit}>
