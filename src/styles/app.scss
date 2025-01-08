@@ -1,0 +1,30 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --font-family-header: 'Montserrat','Helvetica Neue','Helvetica','Tahoma','Arial',sans-serif;
+  --font-family-text: 'Helvetica Neue','Helvetica','Tahoma','Arial',sans-serif;
+  --colour-dark-blue: #202A30;
+  --colour-white: #fff;
+  --colour-off-white: #D4D9D5;
+}
+
+html,
+body,
+#root,
+.App {
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+body {
+  color: var(--colour-dark-blue);
+  font-family: var(--font-family-text);
+  font-weight: 400;
+  background: var(--colour-off-white);
+  text-align: center;
+}
+
+@import './layout';

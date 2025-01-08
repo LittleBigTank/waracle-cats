@@ -1,0 +1,61 @@
+header {
+    position: relative;
+    min-width: 320px;
+    height: 100px;
+    text-align: center;
+    background: var(--colour-dark-blue);
+    padding: 1em;
+    box-shadow: 0 0 8px 4px rgba(30, 30, 30, 0.6);
+
+    h1 {
+        position: relative;
+        display: inline-block;
+        font-family: var(--font-family-header);
+        font-weight: 700;
+        font-size: 50px;
+        color: var(--colour-white);
+
+        &:before,
+        &:after {
+            position: absolute;
+            content: '';
+            top: 50%;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 12px solid var(--colour-white);
+            margin-top: -28px;
+        }
+
+        &:before {
+            left: 17px;
+        }
+
+        &:after {
+            right: 10px;
+        }
+    }
+
+    .user-panel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 14px;
+        color: var(--colour-white);
+        padding: 10px;
+
+        svg {
+            height: 18px;
+            margin: -2px 2px 0 0;
+        }
+
+        @media (screen(sm)) {
+            font-size: 16px;
+            padding: 10px 16px;
+
+            svg {
+                height: 20px;
+                margin: -2px 4px 0 0;
+            }
+        }
+    }
+}

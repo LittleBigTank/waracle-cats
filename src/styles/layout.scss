@@ -1,0 +1,15 @@
+main {
+  min-width: 320px;
+  max-width: 1870px;
+  min-height: calc(100% - 160px);
+  padding: 20px 10px;
+  margin: 0 auto;
+
+  @media (screen(sm)) {
+    padding: 20px 16px;
+  }
+}
+
+.form-wrapper {
+  min-width: 60%;
+}

@@ -1,0 +1,36 @@
+{
+  "name": "Cats",
+  "short_name": "Cats",
+  "theme_color": "#202A30",
+  "background_color": "#D4D9D5",
+  "display": "browser",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "60x60",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon-76x76.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon-120x120.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon-152x152",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon-180x180",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
