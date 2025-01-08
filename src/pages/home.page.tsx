@@ -48,6 +48,7 @@ const HomePage = () => {
 
     setIsLoading(false);
     setHasMore(imageList.payload.more);
+    handleScroll();
 	}, [imageList]);
 
   const handleScroll = useCallback(() => {
@@ -65,8 +66,16 @@ const HomePage = () => {
   }, [hasMore, isLoading, loadingError]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const listenEvents = ['scroll', 'resize'];
+    listenEvents.forEach(function(e) {
+      window.addEventListener(e, handleScroll);
+    });
+
+    return () => {
+      listenEvents.forEach(function(e) {
+        window.removeEventListener(e, handleScroll);
+      });
+    }
   }, [handleScroll]);
 
   const reloadImages = () => {

@@ -13,10 +13,10 @@ const Cat = (props: CatProps) => {
 
   return (
     <div>
-      <div className={`flex items-center justify-center shadow-md border rounded bg-black h-[602px]`}>
+      <div className={`flex items-center justify-center shadow-md border rounded bg-black h-[402px] 2xl:h-[502px] 3xl:h-[602px]`}>
         {image !== undefined ?
           <img src={image.url}
-            className={`max-h-[600px]`}
+            className={`max-h-[400px] 2xl:max-h-[500px] 3xl:max-h-[600px]`}
             alt="Cat" />
           : <p className='text-white'>Cat Not Found</p>
         }

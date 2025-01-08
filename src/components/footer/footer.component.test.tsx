@@ -13,6 +13,7 @@ describe('Header', () => {
 		const element = container.querySelector('footer');
 		
 		// tests
+		expect(element).toBeDefined();
 		expect(element!.classList).toContain('min-w-[320px]');
 		expect(element!.classList).toContain('h-[60px]');
 		expect(element!.classList).toContain('text-center');

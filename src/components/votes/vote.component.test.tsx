@@ -58,7 +58,7 @@ describe('Vote', () => {
 		const reduxState = createDefaultReduxState();
 		reduxState.votes.error = new Error();
 		const {	renderResult: { container }	}  = await render(
-			<Vote imageId='1234' />,
+			<Vote imageId={mockImages[1].id} />,
 			{reduxState}
 		);
 
@@ -73,6 +73,32 @@ describe('Vote', () => {
 		expect(svgs[0].classList).toContain('cursor-pointer');
 		expect(svgs[0].classList).toContain('stroke-red');
 		expect(svgs[0].classList).toContain('h-6');
+	});
+
+	it('Reload on loading error', async () => {
+		jest.spyOn(ApiHelper, 'get').mockResolvedValue(mockAPIVotes);
+
+		const reduxState = createDefaultReduxState();
+		reduxState.votes.error = new Error();
+		const {	renderResult: { container }	}  = await render(
+			<Vote imageId={mockImages[1].id} />,
+			{reduxState}
+		);
+
+		const spans = container.querySelectorAll('span');
+		let svgs = container.querySelectorAll('svg');
+
+		// tests
+		expect(spans.length).toEqual(0);
+		expect(svgs.length).toEqual(1);
+		expect(svgs[0].innerHTML).toEqual('error.svg');
+
+		// click to reload
+		interact.click(svgs[0] as unknown as HTMLElement);
+		await waitFor(async () => {
+			svgs = container.querySelectorAll('svg');
+			expect(svgs.length).toEqual(2);
+		});
 	});
 
 	it('Render loading', async () => {

@@ -1,5 +1,5 @@
 import React, { act } from 'react';
-import { render as rtlRender } from '@testing-library/react';
+import { fireEvent, render as rtlRender } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -97,8 +97,9 @@ export const interact = {
 		});
 	},
 	upload: async (element: HTMLElement, file: File) => {
-		await act(async () => {
-			userEvent.upload(element, file);
-		});
+		//await act(async () => {
+		//	userEvent.upload(element, file);
+		//});
+		fireEvent.change(element, { target: { files: { item: () => file, length: 1, 0: file } },})
 	},
 };

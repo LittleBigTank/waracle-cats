@@ -7,7 +7,7 @@ import Favourite from './favourite.component';
 
 // mocks
 import { mockImages } from '../../test/images.mock';
-import { mockFavourites } from '../../test//favourites.mock';
+import { mockAPIFavourites, mockFavourites } from '../../test//favourites.mock';
 
 const userId = 'W1234';
 
@@ -17,16 +17,16 @@ describe('Favourite', () => {
 			<Favourite imageId={mockImages[0].id} />,
 		);
 
-		const svgs = container.querySelectorAll('svg');
+		const svg = container.querySelector('svg');
 
 		// tests
-		expect(svgs.length).toEqual(1);
-		expect(svgs[0].innerHTML).toEqual('heart.svg');
-		expect(svgs[0].classList.length).toEqual(4);
-		expect(svgs[0].classList).toContain('cursor-pointer');
-		expect(svgs[0].classList).toContain('stroke-red');
-		expect(svgs[0].classList).toContain('fill-red');
-		expect(svgs[0].classList).toContain('h-6');
+		expect(svg).toBeDefined();
+		expect(svg!.innerHTML).toEqual('heart.svg');
+		expect(svg!.classList.length).toEqual(4);
+		expect(svg!.classList).toContain('cursor-pointer');
+		expect(svg!.classList).toContain('stroke-red');
+		expect(svg!.classList).toContain('fill-red');
+		expect(svg!.classList).toContain('h-6');
 	});
 
 	it('Render non-favourited correctly', async () => {
@@ -34,15 +34,15 @@ describe('Favourite', () => {
 			<Favourite imageId={mockImages[1].id} />,
 		);
 
-		const svgs = container.querySelectorAll('svg');
+		const svg = container.querySelector('svg');
 
 		// tests
-		expect(svgs.length).toEqual(1);
-		expect(svgs[0].innerHTML).toEqual('heart.svg');
-		expect(svgs[0].classList.length).toEqual(3);
-		expect(svgs[0].classList).toContain('cursor-pointer');
-		expect(svgs[0].classList).toContain('stroke-dark-blue');
-		expect(svgs[0].classList).toContain('h-6');
+		expect(svg).toBeDefined();
+		expect(svg!.innerHTML).toEqual('heart.svg');
+		expect(svg!.classList.length).toEqual(3);
+		expect(svg!.classList).toContain('cursor-pointer');
+		expect(svg!.classList).toContain('stroke-dark-blue');
+		expect(svg!.classList).toContain('h-6');
 	});
 
 	it('Render loading error', async () => {
@@ -53,15 +53,42 @@ describe('Favourite', () => {
 			{reduxState}
 		);
 
-		const svgs = container.querySelectorAll('svg');
+		let svg = container.querySelector('svg');
 
 		// tests
-		expect(svgs.length).toEqual(1);
-		expect(svgs[0].innerHTML).toEqual('error.svg');
-		expect(svgs[0].classList.length).toEqual(3);
-		expect(svgs[0].classList).toContain('cursor-pointer');
-		expect(svgs[0].classList).toContain('stroke-red');
-		expect(svgs[0].classList).toContain('h-6');
+		expect(svg).toBeDefined();
+		expect(svg!.innerHTML).toEqual('error.svg');
+		expect(svg!.classList.length).toEqual(3);
+		expect(svg!.classList).toContain('cursor-pointer');
+		expect(svg!.classList).toContain('stroke-red');
+		expect(svg!.classList).toContain('h-6');
+	});
+
+	it('Reload on loading error', async () => {
+		jest.spyOn(ApiHelper, 'get').mockResolvedValue(mockAPIFavourites);
+
+		const reduxState = createDefaultReduxState();
+		reduxState.favourites.error = new Error();
+		const {	renderResult: { container }	}  = await render(
+			<Favourite imageId={mockImages[1].id} />,
+			{reduxState}
+		);
+
+		let svg = container.querySelector('svg');
+
+		// tests
+		expect(svg).toBeDefined();
+		expect(svg!.innerHTML).toEqual('error.svg');
+
+		// click to reload
+		interact.click(svg as unknown as HTMLElement);
+		await waitFor(async () => {
+			svg = container.querySelector('svg');
+			expect(svg!.classList.length).toEqual(3);
+			expect(svg!.classList).toContain('cursor-pointer');
+			expect(svg!.classList).toContain('stroke-dark-blue');
+			expect(svg!.classList).toContain('h-6');
+		});
 	});
 
 	it('Render loading', async () => {
@@ -74,17 +101,17 @@ describe('Favourite', () => {
 			{reduxState}
 		);
 
-		const svgs = container.querySelectorAll('svg');
+		const svg = container.querySelector('svg');
 
 		// tests
-		expect(svgs.length).toEqual(1);
-		expect(svgs[0].innerHTML).toContain('<path');
-		expect(svgs[0].classList.length).toEqual(5);
-		expect(svgs[0].classList).toContain('inline');
-		expect(svgs[0].classList).toContain('-mt-1');
-		expect(svgs[0].classList).toContain('text-white');
-		expect(svgs[0].classList).toContain('animate-spin');
-		expect(svgs[0].classList).toContain('fill-dark-blue');
+		expect(svg).toBeDefined();
+		expect(svg!.innerHTML).toContain('<path');
+		expect(svg!.classList.length).toEqual(5);
+		expect(svg!.classList).toContain('inline');
+		expect(svg!.classList).toContain('-mt-1');
+		expect(svg!.classList).toContain('text-white');
+		expect(svg!.classList).toContain('animate-spin');
+		expect(svg!.classList).toContain('fill-dark-blue');
 	});
 
 	it('Add favourite', async () => {
@@ -98,7 +125,7 @@ describe('Favourite', () => {
 			<Favourite imageId={mockImages[1].id} />
 		);
 
-		let svg = container.querySelectorAll('svg')[0] as unknown as HTMLElement;
+		let svg = container.querySelector('svg') as unknown as HTMLElement;
 
 		// tests
 		expect(svg.innerHTML).toEqual('heart.svg');
@@ -130,7 +157,7 @@ describe('Favourite', () => {
 			<Favourite imageId={mockImages[0].id} />
 		);
 
-		let svg = container.querySelectorAll('svg')[0] as unknown as HTMLElement;
+		let svg = container.querySelector('svg') as unknown as HTMLElement;
 
 		// tests
 		expect(svg.innerHTML).toEqual('heart.svg');
@@ -140,7 +167,7 @@ describe('Favourite', () => {
 		// click
 		interact.click(svg);
 		await waitFor(async () => {
-			svg = container.querySelectorAll('svg')[0] as unknown as HTMLElement;
+			svg = container.querySelector('svg') as unknown as HTMLElement;
 			expect(svg.classList).toContain('stroke-dark-blue');
 		});
 
